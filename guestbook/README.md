@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [GuestBook](#guestbook)
+  - [Overview](#overview)
+  - [Raw Resources](#raw-resources)
+  - [Application Discovery](#application-discovery)
+    - [All-in-one](#all-in-one)
+      - [Preparation](#preparation)
+      - [Discovery](#discovery)
+    - [Multicluster](#multicluster)
+  - [Model Resources](#model-resources)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # GuestBook
 
 GUestBook is example provided in [Kubernetes community](https://kubernetes.io/docs/tutorials/stateless-application/guestbook/). This [github repository](https://github.com/kubernetes/examples/tree/master/guestbook) contains all the required files for this example. 

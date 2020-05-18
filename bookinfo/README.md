@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [BookInfo](#bookinfo)
+  - [Overview](#overview)
+  - [Raw Resources](#raw-resources)
+  - [Discovery Resources](#discovery-resources)
+  - [Model Resources](#model-resources)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # BookInfo
 
 BookInfo is example provided by [Istio community](https://istio.io/docs/examples/virtual-machines/bookinfo/). This [github repository](https://github.com/istio/istio/tree/master/samples/bookinfo) contains all the required files for this example. 
