@@ -132,7 +132,7 @@ deployable-default-service-guestbook-redis-slave-5wtpz       Deployable      cor
 gbapp-tjzfl                                                  Application     app.k8s.io/v1beta1           104s 
 ```
 
-- Trigger resource generation and assembly, uncomment the tool
+- Trigger resource generation and assembly, uncomment the `#    tools.hybridapp.io/hybrid-discovery-create-assembler: "true"`
 
 ```shell
 % kubectl apply -f guestbook/discovery/model.yaml                 
@@ -181,7 +181,7 @@ spec:
 status:
   lastUpdateTime: "2020-05-18T00:16:28Z"
   phase: ""
-kuan@ca.ibm.com@Kuans-MacBook-Pro samples % kubectl get hdpl,placementrule
+% kubectl get hdpl,placementrule
 NAME                                                                     AGE
 deployable.core.hybridapp.io/toronto-deployment-guestbook-frontend       67s
 deployable.core.hybridapp.io/toronto-deployment-guestbook-redis-master   67s
