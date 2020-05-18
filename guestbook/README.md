@@ -180,12 +180,14 @@ placementrule.apps.open-cluster-management.io/toronto-service-guestbook-redis-ma
 
 ### Multicluster
 
+Assuming the multicluster environment is already set, the only difference from the all-in-one scenario above is, deploy the guestbook raw example in the managed cluster rather than the hub cluster.
+
 ## Model Resources
 
 Apply resources in this folder gives the application model directly.
 
 ```shell
-% kubectl apply -f guestbook/model
+% kubectl apply -f guestbook/model/all-in-one.yaml
 application.app.k8s.io/ham-sample-gbapp created
 deployable.core.hybridapp.io/deployment-guestbook-frontend created
 deployable.core.hybridapp.io/service-guestbook-frontend created
