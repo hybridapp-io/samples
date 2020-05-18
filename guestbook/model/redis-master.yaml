@@ -1,0 +1,87 @@
+apiVersion: core.hybridapp.io/v1alpha1
+kind: Deployable
+metadata:
+  labels:
+    ham-sample-app: guestbook
+  name: deployment-guestbook-redis-master
+spec:
+  hybridtemplates:
+  - deployerType: kubernetes
+    template:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: redis-master
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: redis
+            role: master
+            tier: backend
+        strategy:
+          rollingUpdate:
+            maxSurge: 25%
+            maxUnavailable: 25%
+          type: RollingUpdate
+        template:
+          metadata:
+            labels:
+              app: redis
+              role: master
+              tier: backend
+          spec:
+            containers:
+            - image: k8s.gcr.io/redis:e2e
+              imagePullPolicy: IfNotPresent
+              name: master
+              ports:
+              - containerPort: 6379
+                protocol: TCP
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 100Mi
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+            dnsPolicy: ClusterFirst
+            restartPolicy: Always
+            schedulerName: default-scheduler
+            securityContext: {}
+            terminationGracePeriodSeconds: 30
+  placement:
+    placementRef:
+      name: ham-sample-guestbook
+---
+apiVersion: core.hybridapp.io/v1alpha1
+kind: Deployable
+metadata:
+  labels:
+    ham-sample-app: guestbook
+  name: service-guestbook-redis-master
+spec:
+  hybridtemplates:
+  - deployerType: kubernetes
+    template:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        labels:
+          app: redis
+          role: master
+          tier: backend
+        name: redis-master
+      spec:
+        ports:
+        - port: 6379
+          targetPort: 6379
+        selector:
+          app: redis
+          role: master
+          tier: backend
+        type: ClusterIP
+      status:
+        loadBalancer: {}
+  placement:
+    placementRef:
+      name: ham-sample-guestbook

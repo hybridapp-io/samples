@@ -1,0 +1,17 @@
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: gbapp
+  annotations:
+    core.hybridapp.io/hybrid-discovery: "enabled"
+    tools.hybridapp.io/hybrid-discover-clusterscoped: "true"
+    tools.hybridapp.io/hybrid-discovery-create-assembler: "true"
+spec:
+  selector:
+    matchLabels:
+      ham-sample-app: guestbook
+  componentKinds:
+    - group: v1
+      kind: Service
+    - group: apps
+      kind: Deployment
