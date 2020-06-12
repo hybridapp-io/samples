@@ -62,7 +62,6 @@ spec:
   placement:
     placementRef:
       name: ham-sample-guestbook
-status:
 ---
 apiVersion: core.hybridapp.io/v1alpha1
 kind: Deployable
@@ -100,7 +99,6 @@ metadata:
 spec:
   clusters:
   - name: toronto
-status:
 ---
 apiVersion: core.hybridapp.io/v1alpha1
 kind: Deployable
@@ -184,8 +182,6 @@ spec:
           role: master
           tier: backend
         type: ClusterIP
-      status:
-        loadBalancer: {}
   placement:
     placementRef:
       name: ham-sample-guestbook
