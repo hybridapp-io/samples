@@ -80,7 +80,6 @@ spec:
           role: slave
           tier: backend
         name: redis-slave
-        namespace: guestbook
       spec:
         ports:
         - port: 6379
