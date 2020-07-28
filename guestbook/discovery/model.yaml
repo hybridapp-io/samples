@@ -4,7 +4,7 @@ metadata:
   name: gbapp
   annotations:
     core.hybridapp.io/hybrid-discovery: "enabled"
-    tools.hybridapp.io/hybrid-discovery-clusterscoped: "true"
+    core.hybridapp.io/hybrid-discovery-clusterscoped: "true"
 #    tools.hybridapp.io/hybrid-discovery-create-assembler: "true"
 spec:
   selector:
