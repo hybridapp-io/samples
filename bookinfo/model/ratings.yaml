@@ -1,0 +1,89 @@
+apiVersion: core.hybridapp.io/v1alpha1
+kind: Deployable
+metadata:
+  labels:
+    ham-sample-app: bookinfo
+  name: service-bookinfo-ratings
+spec:
+  hybridtemplates:
+  - deployerType: kubernetes
+    template:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: ratings
+        labels:
+          ham-sample-app: bookinfo
+          app: ratings
+          service: ratings
+      spec:
+        ports:
+        - port: 9080
+          name: http
+        selector:
+          app: ratings
+  placement:
+    placementRef:
+      name: ham-sample-bookinfo
+---
+apiVersion: core.hybridapp.io/v1alpha1
+kind: Deployable
+metadata:
+  labels:
+    ham-sample-app: bookinfo
+  name: serviceaccount-bookinfo-bookinfo-ratings
+spec:
+  hybridtemplates:
+  - deployerType: kubernetes
+    template:
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: bookinfo-ratings
+        labels:
+          ham-sample-app: bookinfo
+          account: ratings
+  placement:
+    placementRef:
+      name: ham-sample-bookinfo
+---
+apiVersion: core.hybridapp.io/v1alpha1
+kind: Deployable
+metadata:
+  labels:
+    ham-sample-app: bookinfo
+  name: deployment-bookinfo-ratings-v1
+spec:
+  hybridtemplates:
+  - deployerType: kubernetes
+    template:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: ratings-v1
+        labels:
+          ham-sample-app: bookinfo
+          app: ratings
+          version: v1
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: ratings
+            version: v1
+        template:
+          metadata:
+            labels:
+              app: ratings
+              version: v1
+          spec:
+            serviceAccountName: bookinfo-ratings
+            containers:
+            - name: ratings
+              image: docker.io/istio/examples-bookinfo-ratings-v1:1.16.0
+              imagePullPolicy: IfNotPresent
+              ports:
+              - containerPort: 9080
+  placement:
+    placementRef:
+      name: ham-sample-bookinfo
