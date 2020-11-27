@@ -1,0 +1,210 @@
+apiVersion: core.hybridapp.io/v1alpha1
+kind: Deployable
+metadata:
+  labels:
+    ham-sample-app: bookinfo
+  name: service-bookinfo-reviews
+spec:
+  hybridtemplates:
+  - deployerType: kubernetes
+    template:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: reviews
+        labels:
+          ham-sample-app: bookinfo
+          app: reviews
+          service: reviews
+      spec:
+        ports:
+        - port: 9080
+          name: http
+        selector:
+          app: reviews
+  placement:
+    placementRef:
+      name: ham-sample-bookinfo
+---
+apiVersion: core.hybridapp.io/v1alpha1
+kind: Deployable
+metadata:
+  labels:
+    ham-sample-app: bookinfo
+  name: serviceaccount-bookinfo-bookinfo-reviews
+spec:
+  hybridtemplates:
+  - deployerType: kubernetes
+    template:
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: bookinfo-reviews
+        labels:
+          ham-sample-app: bookinfo
+          account: reviews
+  placement:
+    placementRef:
+      name: ham-sample-bookinfo
+---
+apiVersion: core.hybridapp.io/v1alpha1
+kind: Deployable
+metadata:
+  labels:
+    ham-sample-app: bookinfo
+  name: deployment-bookinfo-reviews-v1
+spec:
+  hybridtemplates:
+  - deployerType: kubernetes
+    template:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: reviews-v1
+        labels:
+          ham-sample-app: bookinfo
+          app: reviews
+          version: v1
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: reviews
+            version: v1
+        template:
+          metadata:
+            labels:
+              app: reviews
+              version: v1
+          spec:
+            serviceAccountName: bookinfo-reviews
+            containers:
+            - name: reviews
+              image: docker.io/istio/examples-bookinfo-reviews-v1:1.16.0
+              imagePullPolicy: IfNotPresent
+              env:
+              - name: LOG_DIR
+                value: "/tmp/logs"
+              ports:
+              - containerPort: 9080
+              volumeMounts:
+              - name: tmp
+                mountPath: /tmp
+              - name: wlp-output
+                mountPath: /opt/ibm/wlp/output
+            volumes:
+            - name: wlp-output
+              emptyDir: {}
+            - name: tmp
+              emptyDir: {}
+  placement:
+    placementRef:
+      name: ham-sample-bookinfo
+---
+apiVersion: core.hybridapp.io/v1alpha1
+kind: Deployable
+metadata:
+  labels:
+    ham-sample-app: bookinfo
+  name: deployment-bookinfo-reviews-v2
+spec:
+  hybridtemplates:
+  - deployerType: kubernetes
+    template:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: reviews-v2
+        labels:
+          ham-sample-app: bookinfo
+          app: reviews
+          version: v2
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: reviews
+            version: v2
+        template:
+          metadata:
+            labels:
+              app: reviews
+              version: v2
+          spec:
+            serviceAccountName: bookinfo-reviews
+            containers:
+            - name: reviews
+              image: docker.io/istio/examples-bookinfo-reviews-v2:1.16.0
+              imagePullPolicy: IfNotPresent
+              env:
+              - name: LOG_DIR
+                value: "/tmp/logs"
+              ports:
+              - containerPort: 9080
+              volumeMounts:
+              - name: tmp
+                mountPath: /tmp
+              - name: wlp-output
+                mountPath: /opt/ibm/wlp/output
+            volumes:
+            - name: wlp-output
+              emptyDir: {}
+            - name: tmp
+              emptyDir: {}
+  placement:
+    placementRef:
+      name: ham-sample-bookinfo
+---
+apiVersion: core.hybridapp.io/v1alpha1
+kind: Deployable
+metadata:
+  labels:
+    ham-sample-app: bookinfo
+  name: deployment-bookinfo-reviews-v3
+spec:
+  hybridtemplates:
+  - deployerType: kubernetes
+    template:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: reviews-v3
+        labels:
+          ham-sample-app: bookinfo
+          app: reviews
+          version: v3
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: reviews
+            version: v3
+        template:
+          metadata:
+            labels:
+              app: reviews
+              version: v3
+          spec:
+            serviceAccountName: bookinfo-reviews
+            containers:
+            - name: reviews
+              image: docker.io/istio/examples-bookinfo-reviews-v3:1.16.0
+              imagePullPolicy: IfNotPresent
+              env:
+              - name: LOG_DIR
+                value: "/tmp/logs"
+              ports:
+              - containerPort: 9080
+              volumeMounts:
+              - name: tmp
+                mountPath: /tmp
+              - name: wlp-output
+                mountPath: /opt/ibm/wlp/output
+            volumes:
+            - name: wlp-output
+              emptyDir: {}
+            - name: tmp
+              emptyDir: {}
+  placement:
+    placementRef:
+      name: ham-sample-bookinfo
