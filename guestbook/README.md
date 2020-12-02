@@ -116,6 +116,8 @@ pod/ham-sample-pod                            3/3     Running   0          3m55s
 
 #### Discovery
 
+- To discover resources from a specific cluster, uncomment the `tools.hybridapp.io/hybrid-discovery-target: "{\"namespace\":\"toronto\",\"name\":\"toronto\"}"` annotation. The value of the annotation is a json representing a serialized kubernetes object reference (usually indicated by a name and a namespace). If this annotation is not defined, the discovery process will run across all managed clusters. 
+
 - Apply Application for discovery tool
 
 ``` shell
