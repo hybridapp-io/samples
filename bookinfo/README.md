@@ -68,7 +68,7 @@ serviceaccount/bookinfo-reviews       1         36s
 
 ## Discovery
 
-- To discover resources from a specific cluster, uncomment the `tools.hybridapp.io/hybrid-discovery-target: "{\"namespace\":\"toronto\",\"name\":\"toronto\"}"` annotation. The value of the annotation is a json representing a serialized kubernetes object reference (usually indicated by a name and a namespace). If this annotation is not defined, the discovery process will run across all managed clusters. 
+- To discover resources from a specific cluster, uncomment the `tools.hybridapp.io/hybrid-discovery-target: "{\"name\":\"toronto\"}"` annotation. The value of the annotation is a json representing a serialized kubernetes object reference (usually indicated by a cluster name). If this annotation is not defined, the discovery process will run across all managed clusters. 
 
 - Apply Application for discovery tool
 
@@ -113,7 +113,7 @@ metadata:
   uid: ff159187-5efe-422b-9b0c-24e4a615de37
 spec:
   managedClustersComponents:
-  - cluster: toronto/toronto
+  - cluster: toronto
     components:
     - apiVersion: apps.open-cluster-management.io/v1
       kind: Deployable

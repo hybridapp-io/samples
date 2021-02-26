@@ -99,9 +99,9 @@ service/redis-slave    ClusterIP   10.99.140.251   <none>        6379/TCP       
 
 ```shell
 % kubectl apply -f guestbook/discovery/prerequisites.yaml
-customresourcedefinition.apiextensions.k8s.io/clusters.clusterregistry.k8s.io created
+customresourcedefinition.apiextensions.k8s.io/managedclusters.cluster.open-cluster-management.io created
 namespace/toronto created
-cluster.clusterregistry.k8s.io/toronto created
+managedcluster.cluster.open-cluster-management.io/toronto created
 operator.deploy.hybridapp.io/ham-sample created
 % kubectl get clusters --all-namespaces
 NAMESPACE   NAME      AGE
@@ -116,7 +116,7 @@ pod/ham-sample-pod                            3/3     Running   0          3m55s
 
 #### Discovery
 
-- To discover resources from a specific cluster, uncomment the `tools.hybridapp.io/hybrid-discovery-target: "{\"namespace\":\"toronto\",\"name\":\"toronto\"}"` annotation. The value of the annotation is a json representing a serialized kubernetes object reference (usually indicated by a name and a namespace). If this annotation is not defined, the discovery process will run across all managed clusters. 
+- To discover resources from a specific cluster, uncomment the `tools.hybridapp.io/hybrid-discovery-target: "{\"name\":\"toronto\"}"` annotation. The value of the annotation is a json representing a serialized kubernetes object reference (usually indicated by a cluster name). If this annotation is not defined, the discovery process will run across all managed clusters. 
 
 - Apply Application for discovery tool
 
@@ -154,7 +154,7 @@ metadata:
   uid: d025d9fe-989c-11ea-84ae-00000a10203b
 spec:
   managedClustersComponents:
-  - cluster: toronto/toronto
+  - cluster: toronto
     components:
     - apiVersion: apps.open-cluster-management.io/v1
       kind: Deployable

@@ -5,7 +5,7 @@ metadata:
   annotations:
     core.hybridapp.io/hybrid-discovery: "enabled"
     core.hybridapp.io/hybrid-discovery-clusterscoped: "true"
-    #tools.hybridapp.io/hybrid-discovery-target: "{\"namespace\":\"toronto\",\"name\":\"toronto\"}"
+    #tools.hybridapp.io/hybrid-discovery-target: "{\"name\":\"toronto\"}"
     #tools.hybridapp.io/hybrid-discovery-create-assembler: "true"
 spec:
   selector:
