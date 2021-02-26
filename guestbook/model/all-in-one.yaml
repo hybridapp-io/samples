@@ -98,7 +98,8 @@ metadata:
   name: ham-sample-guestbook
 spec:
   targets:
-  - apiVersion: clusterregistry.k8s.io/v1alpha1
+  - apiVersion: cluster.open-cluster-management.io/v1
+    kind: ManagedCluster
     name: toronto
 ---
 apiVersion: core.hybridapp.io/v1alpha1
